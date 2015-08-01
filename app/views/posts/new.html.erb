@@ -1,0 +1,11 @@
+<%= render 'shared/header', title: "Create a new post" %>
+
+<%= form_for @posts, url: {action: "create"} do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %> <br/>
+  <%= f.label :url %>
+  <%= f.text_field :url %> <br/>
+  <%= f.label :description %>
+  <%= f.text_area :description, size: "200x12" %><br/>
+  <%= f.submit "Create", class: "btn btn-primary" %>
+<% end %>
