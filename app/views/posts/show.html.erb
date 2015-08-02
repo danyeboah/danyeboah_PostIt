@@ -1,4 +1,6 @@
-<%= render @posts.categories %>
+<%= render @post.categories %>
+<p> <%= render 'shared/header', :title => @post.title %> </p>
 
-
-<p> <%= @posts.description %> </p>
+<p> <%= @post.description %> 
+    <%= link_to 'Edit Post', edit_post_path(@post) %>
+</p>

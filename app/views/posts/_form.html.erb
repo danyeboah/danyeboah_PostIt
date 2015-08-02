@@ -1,0 +1,22 @@
+<% if @post.errors.any? %>
+  <div class = "alert alert-danger">
+    <h5> Errors...Please try again </h5>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li> <%= message %> </li>
+      <% end %>
+  <% end %>
+
+  </div>
+
+
+
+<%= form_for @post, url: {action: "create"} do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %> <br/>
+  <%= f.label :url %>
+  <%= f.text_field :url %> <br/>
+  <%= f.label :description %>
+  <%= f.text_area :description, size: "200x12" %><br/>
+  <%= f.submit "Create", class: "btn btn-primary" %>
+<% end %>
