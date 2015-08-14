@@ -1,4 +1,4 @@
-class Comment < ActiveRecord::Migration
+class AbortedComment < ActiveRecord::Migration
   def change
   	
   end
