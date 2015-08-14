@@ -1,22 +1,21 @@
-<h3>Welcome To African Financials -- A Forum for Discussing African Private Equity</h3>
+<h3 class = "header">Welcome To African Financials </h3> 
+<h5 class = "header"> A Forum for Discussing African Private Equity</h5>
+<hr/>
 
 <%= render 'shared/header', title: 'Financial Posts' %>
 
-<p> <%= link_to 'New Post', new_post_path, class: "btn btn-success" %> </p>
+<% if logged_in? %>
+  <p> <%= link_to new_post_path do %> 
+  		<button class = "btn btn-success"> <i class="icon-plus"></i> New Post </button>
+  </p>
+  <% end %>
+<% end %>
+
+  
+ 
+
 <% @posts.each do |post| %>
-	<div class = 'row'>
-		<div class = 'span8 well'>
-			<%= render post.categories %>
-  	
-			<h4><%= link_to post.title, post_path(post) %> </h4>
-			<p><%= post.description %> </p>
-			<span class = 'quiet'> posted by </span> <%= post.user.username %>
-			<small> at <%= post.created_at %> </small>
-			<p>
-				<%= link_to pluralize(post.comments.size, "comment"), post_path(post) %>
-			</p>
-		</div>
-	</div>
+	<%= render 'post', post: post %>
 <% end %>
 
 

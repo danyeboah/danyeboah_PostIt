@@ -1,0 +1,29 @@
+<div class = 'row'>
+  <div class = 'span0 well text-center'>
+    <% if logged_in? %>
+
+      <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
+        <i class = 'icon-thumbs-up'></i>
+      <% end %>
+    <% end %>
+
+  <br/>
+    <%= "#{comment.vote_popular} votes" %>
+  <br/> 
+
+  <% if logged_in? %>
+     <%= link_to vote_post_path(comment.post, comment, vote: false), method: 'post' do %>
+      <i class = 'icon-thumbs-down'></i>
+    <% end %>
+  <% end %>
+  </div>
+
+  <div class = 'span8 well'>
+  <p> <%= comment.body %> </p>
+  <span class = 'quiet'> by </span> <%= link_to "#{comment.user.username}", user_path(comment.user) %>
+  <small> at <%= display_datetime(comment.created_at) %> </small>
+  <% if show_post %>
+    on <%= link_to "#{comment.post.title}", post_path(comment.post) %>
+  <% end %>
+  </div>
+</div>

@@ -31,7 +31,7 @@ div.nav_item {
   float: left;
 }
 
-.label  {
+.label, .badge {
   a, a:hover, a:focus {
     color: #fff;
     text-decoration: none;
@@ -41,4 +41,24 @@ div.nav_item {
 div.comment_votes {
   padding: 10px;
 }
+
+.upbutton {
+  display: inline;
+  margin: 0px 0px 0px 20px;
+}
+
+
+.header {
+  text-align: center;
+}
+
+.badge {
+  margin: 0px 3px 0px 0px;
+}
+
+.mynav {
+  list-style-type: none;
+  margin: 0px;
+}
+
 

@@ -1,0 +1,26 @@
+<%= render 'shared/header', title: "#{@user.username}'s Profile" %>
+
+<h4> <%= "#{@user.username}'s Activity" %> </h4>
+<hr/>
+
+<ul class = "nav nav-tabs nav-justified">
+  <li class = <%= 'active' if params[:tab].nil? %> >
+    <%= link_to "Posts(#{@user.posts.size})", user_path(@user) %>
+  </li>
+  <li class = <%= 'active' if params[:tab] == 'comments' %> >
+    <%= link_to "Comments(#{@user.comments.size})", user_path(@user, tab: 'comments') %>
+  </li>
+</ul>
+
+<% if params[:tab].nil?%>
+  <% @user.posts.each do |posts| %>
+  <%= render 'posts/post', post: posts %>
+  <% end %>
+<% end %>
+
+
+<% if params[:tab] == 'comments' %>
+  <% @user.comments.each do |comments| %>
+  <%= render 'comments/comments', comment: comments, show_post: true %>
+  <% end %>
+<% end %>
