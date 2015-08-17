@@ -1,15 +1,15 @@
 <%= render 'shared/posterror', object: @post %>
 
 <%= form_for @post do |f| %>
-  <%= f.label :title %>
+  <%= f.label :title, class: 'whiten'%>
   <%= f.text_field :title %> <br/>
-  <%= f.label :url %>
+  <%= f.label :url, class: 'whiten' %>
   <%= f.text_field :url %> <br/>
-  <%= f.label :description %>
+  <%= f.label :description, class: 'whiten' %>
   <%= f.text_area :description, size: "200x12", class: "span4" %><br/>
 
   <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |checkb| %>
-     <% checkb.label(class: "checkbox inline") {checkb.check_box(class: "checkbox") + checkb.text} %> 
+     <% checkb.label(class: "checkbox inline whiten") {checkb.check_box(class: "checkbox") + checkb.text} %> 
      <% end %>
 
   <br/>
