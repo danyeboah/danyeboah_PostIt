@@ -10,8 +10,16 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6}, on: :create
 
+  has_secure_password
 
+  before_save :generate_slug
+    # generate slug for urls
+  def generate_slug
+    self.slug = self.username
+  end
 
+  def to_param
+    self.slug
+  end
 
-  has_secure_password 
 end

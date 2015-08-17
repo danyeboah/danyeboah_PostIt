@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :select_post, only: [:show,:edit,:update,:vote]
-  before_action :require_user, except: [:index,:show]
+  before_action :require_user, except: [:index,:show, :vote]
+  before_action :require_user_to_vote, only: [:vote]
 
   def index
     @posts = Post.all
@@ -40,13 +41,13 @@ class PostsController < ApplicationController
   end
 
   def vote
-    vote = Vote.create(voteable: @post, vote: params[:vote], user: current_user)
+    @vote = Vote.create(voteable: @post, vote: params[:vote], user: current_user)
 
-    if vote.save
-      flash["notice"] = "Your vote was recorded"
+    respond_to do |format|
+      format.html {redirect_to :back, notice: "Your vote was recorded"}
+      format.js
     end
-
-    redirect_to :back
+  
   end
 
 
@@ -56,6 +57,6 @@ class PostsController < ApplicationController
   end
 
   def select_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(slug: params[:id])
   end
 end

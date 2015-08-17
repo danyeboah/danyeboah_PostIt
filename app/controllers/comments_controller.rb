@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :require_user
+  before_action :require_user, except: [:vote]
+  before_action :require_user_to_vote, only: [:vote]
   
   def new
     @comment = Comment.new
@@ -23,11 +24,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     vote = Vote.create(voteable: @comment, vote: params[:vote], user: current_user)
 
-    if vote.save
-      flash["notice"] = "Your vote was recorded"
+    respond_to do |format|
+      format.html {redirect_to :back, "notice" => "Your vote was recorded"}
+      format.js
     end
-
-    redirect_to :back
   end
 
   private

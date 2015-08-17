@@ -20,6 +20,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_user_to_vote
+    unless logged_in?  
+      flash["error"] = "You must be logged in to vote"
+      
+      if request.xhr?
+        render js: "window.location.reload();" 
+      else
+        redirect_to :back
+      end
+
+    end
+    
+  end
+
 
   
     
