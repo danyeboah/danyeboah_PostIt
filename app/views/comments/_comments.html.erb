@@ -5,7 +5,7 @@
       <% end %>
 
   <br/>
-    <span id = "comment_<%=comment.id%>"> <%= "#{comment.vote_popular} votes" %> </span>
+    <span id = "comment_<%=comment.id%>"> <%= pluralize(comment.vote_popular, 'like') %> </span>
   <br/> 
 
      <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post', remote: true do %>

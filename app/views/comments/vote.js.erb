@@ -1,5 +1,5 @@
 <% if @vote.valid? %>
-  $("#comment_<%=@comment.id%>").html('<%= @comment.vote_popular %> likes');
+  $("#comment_<%=@comment.id%>").html("<%=pluralize(@comment.vote_popular,'like') %>");
 <% else %>
   alert('You can only vote once');
 <% end %>

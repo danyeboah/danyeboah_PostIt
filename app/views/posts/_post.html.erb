@@ -6,7 +6,7 @@
 
   <br/>
   <br/>
-    <span id = "post_<%=post.slug%>"> <%= "#{post.vote_popular} likes" %> </span>
+    <span id = "post_<%=post.slug%>"> <%= pluralize(post.vote_popular, 'like') %> </span>
   <br/> 
   <br/>
 

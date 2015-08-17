@@ -22,10 +22,10 @@ class CommentsController < ApplicationController
 
   def vote
     @comment = Comment.find(params[:id])
-    vote = Vote.create(voteable: @comment, vote: params[:vote], user: current_user)
+    @vote = Vote.create(voteable: @comment, vote: params[:vote], user: current_user)
 
     respond_to do |format|
-      format.html {redirect_to :back, "notice" => "Your vote was recorded"}
+      format.html {redirect_to :back, notice: "Your vote was recorded"}
       format.js
     end
   end

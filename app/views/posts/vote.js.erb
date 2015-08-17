@@ -1,5 +1,5 @@
 <% if @vote.valid? %>
-  $("#post_<%=@post.slug%>").html('<%= @post.vote_popular %> likes');
+  $("#post_<%=@post.slug%>").html("<%= pluralize(@post.vote_popular, 'like') %>");
 <% else %>
   alert('You can only vote once');
 <% end %>
