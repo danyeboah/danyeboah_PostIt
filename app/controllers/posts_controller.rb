@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   before_action :select_post, only: [:show,:edit,:update,:vote]
   before_action :require_user, except: [:index,:show, :vote]
   before_action :require_user_to_vote, only: [:vote]
-
+  before_action :require_creator, only: [:edit,:update]
+    
   def index
     @posts = Post.all
   end
@@ -58,5 +59,10 @@ class PostsController < ApplicationController
 
   def select_post
     @post = Post.find_by(slug: params[:id])
+  end
+
+   # check if current user created post or comment
+  def require_creator
+    deny_access unless logged_in? && current_user.is_creator?(@post)
   end
 end

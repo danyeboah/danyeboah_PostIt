@@ -4,7 +4,7 @@
     <h5 class = 'lead'> <%= @post.title %> </h5> 
     <hr/>
   <p><%= @post.description %> </p>
-    <% if is_creator?(@post) %>
+    <% if current_user.is_creator?(@post) %>
     <small> <%= link_to 'Edit Post', edit_post_path(@post) %> </small>
     <% end %>
  </div>

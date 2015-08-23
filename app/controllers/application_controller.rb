@@ -35,6 +35,23 @@ class ApplicationController < ActionController::Base
   end
 
 
+  def require_admin
+    deny_access unless logged_in? && current_user.is_admin?
+  end
+
+  def require_moderator
+    deny_access unless logged_in? && current_user.is_moderator?
+  end
+
+  def deny_access
+    flash[:error] = "You do not have the rights to do that"
+    redirect_to root_path
+  end
+
+
+
+
+
   
     
 end

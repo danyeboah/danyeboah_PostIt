@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
+  before_action :select_comment, only: [:vote]
   before_action :require_user, except: [:vote]
   before_action :require_user_to_vote, only: [:vote]
-  
+  before_action :require_creator, only: [:edit,:update]
+
   def new
     @comment = Comment.new
   end
@@ -21,7 +23,6 @@ class CommentsController < ApplicationController
   end
 
   def vote
-    @comment = Comment.find(params[:id])
     @vote = Vote.create(voteable: @comment, vote: params[:vote], user: current_user)
 
     respond_to do |format|
@@ -35,12 +36,12 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body)
   end
 
+  def select_comment
+    @comment = Comment.find(params[:id])
+  end
 
-
-  
-
-
-
-
-
+    # check if current user created post or comment
+  def require_creator
+    deny_access unless logged_in? && current_user.is_creator?(@comment)
+  end
 end

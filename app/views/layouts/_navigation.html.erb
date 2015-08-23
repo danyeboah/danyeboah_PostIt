@@ -16,14 +16,14 @@
         </li>
         <% end %>
         
-        <% if is_admin?(current_user) %>
+        <% if logged_in? && current_user.is_admin? %>
         
-        <li class='divider'></li>
-        <li> <%= link_to new_category_path do %>
-          <i class="icon-plus"></i>
-          New Category
-          <% end %>
-        </li>
+          <li class='divider'></li>
+          <li> <%= link_to new_category_path do %>
+            <i class="icon-plus"></i>
+            New Category
+            <% end %>
+          </li>
         <% end %>
         
       </ul>

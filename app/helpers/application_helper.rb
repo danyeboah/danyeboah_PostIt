@@ -6,26 +6,11 @@ module ApplicationHelper
 
   # format time
   def display_datetime(dt)
+    if logged_in? && !current_user.time_zone.blank?
+      dt = dt.in_time_zone(current_user.time_zone)
+    end
+
+
     dt.strftime("%m/%d/%Y %l:%M%P %Z") #03/14/2014 9:09pm
   end
-
-  # check if current user is an administrator
-  def is_admin?(user)
-    if user && (user.user_status == 'admin')
-      return true
-    else
-      return false
-    end
-  end
-
-  # check if current user created post or comment
-  def is_creator?(submission)
-    if logged_in? && (submission.user_id == current_user.id)
-      return true
-    else
-      return false
-    end
-  end
-
-
 end
