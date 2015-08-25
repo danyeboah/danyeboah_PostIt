@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823182625) do
+ActiveRecord::Schema.define(version: 20150825032908) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -56,6 +56,9 @@ ActiveRecord::Schema.define(version: 20150823182625) do
     t.string   "user_status"
     t.string   "slug"
     t.string   "time_zone"
+    t.string   "auth_token"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   create_table "votes", force: true do |t|

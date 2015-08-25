@@ -14,6 +14,8 @@ PostitTemplate::Application.routes.draw do
     end
   end 
 
+  resources :password_reset, except: [:destroy]
+
   resources :categories
 
   get 'register', to: 'users#new'

@@ -1,0 +1,19 @@
+<%= render 'shared/header', title: "Reset Password" %>
+
+<%= render 'shared/posterror', object: @user %>
+<div class='row'>
+  <div class= 'span4 well'>
+    <%= form_for @user, url: password_reset_path(params[:id]) do |f| %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label "Confirm password" %>
+      <%= f.password_field :password_confirmation %>
+     <br/>
+     <br/>
+      <%= f.submit "Reset Password", class: "btn btn-success btn-large" %>
+    
+    <% end %>
+  </div>
+
+</div>

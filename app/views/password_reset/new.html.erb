@@ -1,0 +1,10 @@
+<%= render 'shared/header', title: "Reset Password" %>
+
+<h4 class = "whiten"> An email will be sent to you to reset your password </h4>
+<br/>
+<%= form_tag(password_reset_index_path, method: 'post') do %>
+  <%= label_tag :email, "Enter your email address", class: 'whiten' %>
+  <%= text_field_tag :email %>
+  <br/>
+  <%= submit_tag :Submit, class: "btn btn-success" %>
+<% end %>

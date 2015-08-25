@@ -5,7 +5,12 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:username])
 
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+      if(params[:remember_me]) == "1"
+        cookies.permanent.signed[:auth_token] = user.auth_token
+      else
+        cookies.signed[:auth_token] = user.auth_token
+      end
+
       flash["notice"] = "You have been successfully logged in"
       redirect_to root_path
     else 
@@ -15,7 +20,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    cookies.delete(:auth_token)
     flash["notice"] = "You have successfully logged out"
     redirect_to root_path
   end
