@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   before_save :generate_slug
   
-  before_save do 
+  before_create do 
     generate_token(:auth_token)
   end
 
