@@ -25,4 +25,7 @@ PostitTemplate::Application.routes.draw do
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
 
+  get 'confirm_user', to: 'password_reset#confirm_password'
+  post 'confirm_user', to: 'password_reset#auth_confirm_password'
+
 end

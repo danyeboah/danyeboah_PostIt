@@ -1,6 +1,24 @@
 class PasswordResetController < ApplicationController
   def new; end
 
+  def confirm_password
+    @user = current_user
+  end
+
+  def auth_confirm_password
+    @user = User.find_by(username: params[:username])
+
+    if @user && @user.authenticate(params[:password])
+      @user.generate_token(:password_reset_token)
+      @user.password_reset_sent_at = Time.zone.now
+      @user.save
+      flash["notice"] = "Authentication complete"
+      redirect_to edit_password_reset_path(@user.password_reset_token)
+    else 
+      flash[:error] = "Authentication failed"
+      redirect_to confirm_user_path
+    end
+  end
 
   def create
     user = User.find_by(email: params[:email])
@@ -23,7 +41,10 @@ class PasswordResetController < ApplicationController
       redirect_to new_password_reset_path
     elsif @user.update(user_params)
       flash["notice"] = "Your profile was updated"
+      cookies.signed[:auth_token] = @user.auth_token
       redirect_to edit_user_path(@user)
+    else
+      render :edit
     end
   end
 

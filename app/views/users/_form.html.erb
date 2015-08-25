@@ -13,13 +13,24 @@
 
       <%= f.label :username %>
       <%= f.text_field :username %>
+      
+      <% if show_password %>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+        <%= f.label "Confirm password" %>
+        <%= f.password_field :password_confirmation %>
 
-      <%= f.label "Confirm password" %>
-      <%= f.password_field :password_confirmation %>
+        <% else %>
+        <br/>
+        <%= link_to confirm_user_path, class: 'btn btn-warning btn-margin' do %>
+          <%= "Change Password" %>
+        <br/>
+        <% end %>
 
+      <% end %>
+
+      <br/>
       <%= f.label "Timezone" %>
       <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: Time.zone.name %>
       <br/>
