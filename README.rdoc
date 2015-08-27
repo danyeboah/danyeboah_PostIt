@@ -1,4 +1,0 @@
-This is reddit clone forum site built with ruby on rails and twiter bootstrap.
-
-It has authentication functionality, users can create posts, comment on posts, votes on posts/comments.
-
